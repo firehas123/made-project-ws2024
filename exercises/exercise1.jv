@@ -5,9 +5,6 @@ pipeline DataPipeline {
         -> DataInterpreter;
     DataInterpreter
         -> DataCSVInterpreter
-        //-> DataRangeSelector
-        //-> NameHeaderWriter
-        //-> DataColumnDelete
         -> DataTableInterpreter
         -> DataLoader;
 
@@ -19,29 +16,8 @@ pipeline DataPipeline {
     block DataInterpreter oftype TextFileInterpreter { }
 
     block DataCSVInterpreter oftype CSVInterpreter {
-        //enclosing: '"';
         delimiter: ";";
     }
-
-    // block DataRangeSelector oftype CellRangeSelector {
-    //     select: range A1:I*;
-    // }
-
-    // block NameHeaderWriter oftype CellWriter {
-    // at: cell M1;  
-    // write: [
-    //     "Random Number"  
-    // ];
-    // }   
-
-
-    // block DataColumnDelete oftype ColumnDeleter {
-    // delete: [column "ZEITZONE", column "DST", column "geo_punkt", column "Zeitzonen-Datenbank"];
-    // }
-
-
-
-
 
     block DataTableInterpreter oftype TableInterpreter {
         header: true;
@@ -56,6 +32,7 @@ pipeline DataPipeline {
             "Longitude" oftype decimal,
             "Altitude" oftype integer
         ];
+        
     }
 
     block DataLoader oftype SQLiteLoader {
