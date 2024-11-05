@@ -1,7 +1,7 @@
 # Project Plan
 
 ## Title
-AI and Unemployment in the Americas
+##AI and Unemployment in the Americas
 
 ## Main Question
 Does the adoption of AI in various industries across the Americas contribute to job displacement, and if so, how significant is its impact on unemployment?
