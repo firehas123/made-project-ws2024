@@ -1,5 +1,7 @@
 # Project Plan
 
+![AI and Unemployment in the Americas](./title.png)
+
 ## Title
 AI and Unemployment in the Americas
 
