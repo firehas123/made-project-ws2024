@@ -14,10 +14,10 @@ AI is transforming industries, potentially leading to job displacement in certai
 ## Datasources
 
 ### Datasource1: Employment and Unemployment Data
-- **Metadata URL:** [International Labour Organization](https://www.ilo.org/global/statistics-and-databases/lang--en/index.htm)
-- **Data URL:** [World Bank Open Data - Employment by Sector](https://data.worldbank.org/indicator/SL.IND.EMPL.ZS)
-- **Data Type:** CSV
-- **Description:** Provides detailed employment and unemployment data segmented by industry across various regions in the Americas.
+- **Metadata URL:** [ILOSTAT Americas](https://ilostat.ilo.org/data/americas/)
+- **Data URL:** [ILOSTAT Americas - Labor Market Indicators](https://ilostat.ilo.org/data/americas/)
+- **Data Type:** CSV, DTA, XLSX
+- **Description:** Provides detailed labor force statistics by industry, including unemployment rates, labor force participation, informal employment, and working poverty rates. These indicators help examine labor trends in relation to AI adoption across different sectors in the Americas.
 
 ### Datasource2: AI Adoption by Industry
 - **Metadata URL:** [OECD AI Policy Observatory](https://oecd.ai/)
@@ -29,12 +29,12 @@ AI is transforming industries, potentially leading to job displacement in certai
 - **Metadata URL:** [World Bank Development Indicators](https://databank.worldbank.org/source/world-development-indicators)
 - **Data URL:** [World Bank Development Indicators](https://data.worldbank.org/indicator)
 - **Data Type:** CSV
-- **Description:** Provides GDP and productivity data by country and industry, offering insights into economic shifts that may coincide with AI adoption.
+- **Description:** Provides GDP and productivity data by country and industry, offering insights into economic shifts that may coincide with AI adoption and job market changes.
 
 ## Work Packages
 
 1. **Data Collection and Preprocessing**
-   - Collect and clean data on employment, unemployment, and AI adoption across the Americas.
+   - Collect and clean data on employment, unemployment, AI adoption, and economic indicators across the Americas.
    - Issue: [Data Collection Issue #1](#)
 
 2. **Correlation Analysis**
