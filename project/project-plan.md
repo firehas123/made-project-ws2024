@@ -1,46 +1,32 @@
 # Project Plan
 
-![AI and Unemployment in the Americas](./title.png)
+![Respiratory Health and Climate Quality in the Americas](./title.png)
 
 ## Title
-AI and Unemployment in the Americas
+Respiratory Health and Climate Quality in the Americas
 
 ## Main Question
-Does the adoption of AI in various industries across the Americas contribute to job displacement, and if so, how significant is its impact on unemployment?
+Is there a significant relationship between climate quality indicators (such as air pollution levels) and respiratory health outcomes across different regions in the Americas?
 
 ## Description
-AI is transforming industries, potentially leading to job displacement in certain sectors. This project analyzes the correlation between AI adoption and unemployment rates in different regions and industries across the Americas. By examining patterns of AI integration and labor market changes, the project aims to provide insights into whether AI-driven automation is a significant factor in unemployment and which industries or regions are most affected.
+This project investigates the correlation between climate quality factors—specifically air pollution—and respiratory health outcomes in various regions across the Americas. By examining data on air quality and respiratory illness rates, the project aims to determine if poor climate quality is a substantial contributor to respiratory health issues and to identify which regions are most affected.
 
-## Datasources
+## Data Sources
 
-### Datasource1: Employment and Unemployment Data
-- **Metadata URL:** [ILOSTAT Americas](https://ilostat.ilo.org/data/americas/)
-- **Data URL:** [ILOSTAT Americas - Labor Market Indicators](https://ilostat.ilo.org/data/americas/)
-- **Data Type:** CSV, DTA, XLSX
-- **Description:** Provides detailed labor force statistics by industry, including unemployment rates, labor force participation, informal employment, and working poverty rates. These indicators help examine labor trends in relation to AI adoption across different sectors in the Americas.
+### Data Source 1: Climate Quality Data
+- **Metadata URL:** [World Health Organization - Air Pollution Data](https://www.who.int/data/gho/air-pollution)
+- **Data URL:** [WHO Global Health Observatory - Air Quality Indicators](https://www.who.int/data/gho/data/themes/air-pollution)
+- **Data Type:** CSV, XLSX
+- **Description:** This dataset provides information on air pollution indicators (PM2.5, PM10, CO, NO2, ozone) by region and country, enabling analysis of climate quality in relation to respiratory health trends.
 
-### Datasource2: AI Adoption by Industry
-- **Metadata URL:** [OECD AI Policy Observatory](https://oecd.ai/)
-- **Data URL:** [OECD AI Policy Observatory - AI adoption by sector](https://oecd.ai/dashboards)
-- **Data Type:** CSV, JSON
-- **Description:** Tracks AI adoption levels across different industries and regions, allowing correlation analysis with unemployment trends.
-
-### Datasource3: Economic Indicators
-- **Metadata URL:** [World Bank Development Indicators](https://databank.worldbank.org/source/world-development-indicators)
-- **Data URL:** [World Bank Development Indicators](https://data.worldbank.org/indicator)
-- **Data Type:** CSV
-- **Description:** Provides GDP and productivity data by country and industry, offering insights into economic shifts that may coincide with AI adoption and job market changes.
+### Data Source 2: Respiratory Health Data
+- **Metadata URL:** [Global Health Data Exchange - Respiratory Health Indicators](http://ghdx.healthdata.org/)
+- **Data URL:** [Global Health Data Exchange - Respiratory Conditions](http://ghdx.healthdata.org/gbd-results-tool)
+- **Data Type:** CSV, XLSX
+- **Description:** Provides data on respiratory health conditions, including asthma and chronic obstructive pulmonary disease (COPD) prevalence, hospitalizations, and mortality rates by region. This data supports analysis of respiratory health outcomes and their potential links to climate quality.
 
 ## Work Packages
 
 1. **Data Collection and Preprocessing**
-   - Collect and clean data on employment, unemployment, AI adoption, and economic indicators across the Americas.
-   - Issue: [Data Collection Issue #1](#)
-
-2. **Correlation Analysis**
-   - Analyze the relationship between AI adoption and unemployment rates across regions and industries.
-   - Issue: [Correlation Analysis Issue #2](#)
-
-3. **Report and Visualization**
-   - Develop visualizations and summaries to illustrate trends and findings.
-   - Issue: [Report Creation Issue #3](#)
+   - Collect and clean data on climate quality and respiratory health across the Americas.
+  
