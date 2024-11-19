@@ -9,7 +9,7 @@ Respiratory Health and Climate Quality in California
 Is there a significant relationship between climate quality indicators (such as air pollution levels) and respiratory health outcomes across different regions in California?
 
 ## Description
-This project investigates the correlation between climate quality factors—specifically air pollution—and respiratory health outcomes in California. By examining data on air quality and respiratory illness rates, the project aims to determine if poor climate quality is a substantial contributor to respiratory health issues and to identify which regions within California are most affected.
+This project investigates the correlation between climate quality factors specifically air pollution and respiratory health outcomes in California. By examining data on air quality and respiratory illness rates, we are determining if poor climate quality is a substantial contributor to respiratory health issues and also identifying which regions within California are most affected.
 
 ## Data Sources
 
@@ -18,6 +18,13 @@ This project investigates the correlation between climate quality factors—spec
 - **Data URL:** [California Air Quality Data](https://www.kaggle.com/datasets/thaddeussegura/california-air-quality-2020-through-sept10th)
 - **Data Type:** CSV
 - **Description:** This dataset provides daily air quality measurements for pollutants such as PM2.5, ozone, and NO2 in California for 2020. It includes data at the county level, enabling analysis of pollution trends and patterns across different regions.
+
+### Data Source 1: Climate Quality Data
+- **Metadata URL:** [Kaggle - California Air Quality 2020 Through September](https://www.kaggle.com/datasets/thaddeussegura/california-air-quality-2020-through-sept10th)
+- **Data URL:** [California Air Quality Data](https://www.kaggle.com/datasets/thaddeussegura/california-air-quality-2020-through-sept10th)
+- **Data Type:** CSV
+- **Description:** This dataset provides daily air quality measurements for pollutants such as PM2.5, ozone, and NO2 in California for 2020. It includes data at the county level, enabling analysis of pollution trends and patterns across different regions.
+
 
 ### Data Source 2: Respiratory Health Data
 - **Metadata URL:** [California Health and Human Services - Respiratory Virus Dashboard Metrics](https://data.chhs.ca.gov/dataset/respiratory-virus-dashboard-metrics)
