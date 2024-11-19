@@ -1,0 +1,151 @@
+pipeline DataPipeline {
+
+    // Define the structure of the pipeline
+    DataExtractor
+        -> DataXLSXInterpreter
+        -> DataSheetPicker
+        -> DataCellWriter
+        -> DataSelector
+        -> BondTableInterpreter
+        -> BondDataSQLiteLoader;
+    
+    DataSelector
+        ->GDPCTableInterpreter
+        ->GDPDataSQLiteLoader;
+
+    // DataSelector
+    //     -> SecondaryDataTableInterpreter
+    //     -> GDPDataSQLiteLoader;
+
+    // DataSelector
+    //     -> DataTableInterpreter
+    //     -> BondDataSQLiteLoader;    
+    
+    // DataTableInterpreter
+    //     -> DataTableInterpreter
+    //     -> GDPDataSQLiteLoader;
+        
+   
+    // Defining the blocks
+    block DataExtractor oftype HttpExtractor {
+        url: "https://thedocs.worldbank.org/en/doc/7d852628d96b9411d43e5d36d5dff941-0050062022/original/Graphs-Chapter-5-02082022.xlsx";
+    }
+
+    block DataXLSXInterpreter oftype XLSXInterpreter { }
+
+    block DataSheetPicker oftype SheetPicker {
+    sheetName: 'Figure S5.1.2';
+    }
+
+    block DataCellWriter oftype CellWriter {
+        at: range P2:S2;
+        write: [
+        "Country Code",        
+        "Economy",             
+        "GDP per Capita",      
+        "Bond Issuance Share"  
+        ];
+    }
+
+     block DataSelector oftype CellRangeSelector {
+        select: range P2:S45;
+    }
+
+    block BondTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+        "Country Code" oftype CountryCodeAlpha3,
+        "Bond Issuance Share" oftype BISconstraint
+        ];
+    }
+
+  // prepare GDP data for DB
+    block GDPCTableInterpreter oftype TableInterpreter {
+        header: true;
+        columns: [
+        "Country Code" oftype CountryCodeAlpha3,
+        "GDP per Capita" oftype GDPCconstraint
+        ];
+    }
+
+    valuetype GDPCconstraint oftype decimal {
+    // 10. Value types can be further refined by providing constraints.
+    constraints: [
+        zeroConstraint,
+    ];
+    }
+
+    constraint zeroConstraint oftype RangeConstraint {
+        lowerBound: 0;
+    }
+
+    valuetype BISconstraint oftype decimal {
+    // 10. Value types can be further refined by providing constraints.
+    constraints: [
+        postiveConstraint,
+    ];
+    }
+    
+    constraint postiveConstraint oftype RangeConstraint {
+    lowerBound: 0;
+    upperBound: 1;
+    }
+
+
+    block BondDataSQLiteLoader oftype SQLiteLoader {
+        table: "bondIssuance";
+        file: "./country-stats.sqlite";
+    }
+
+    block GDPDataSQLiteLoader oftype SQLiteLoader {
+        table: "gdpPerCapita";
+        file: "./country-stats.sqlite";
+    }
+
+    // block DataCSVInterpreter oftype CSVInterpreter {
+    //     delimiter: ";";
+    // }
+
+    // block DataTableInterpreter oftype TableInterpreter {
+    //     header: true;
+    //     columns: [
+    //         "lfd_nr" oftype integer,
+    //         "stadtteil" oftype testConstraint, 
+    //         "standort" oftype text,
+    //         "baumart_botanisch" oftype text,
+    //         "id" oftype idConstraint,
+    //         "baumfamilie" oftype text
+    //     ];
+    // }
+
+    // block DataLoader oftype SQLiteLoader {
+    //     table: "trees";
+    //     file: "./trees.sqlite";
+    // }
+
+
+    // valuetype testConstraint oftype text {
+    // // 10. Value types can be further refined by providing constraints.
+    // constraints: [
+    //     StartWithVogelsang,
+    // ];
+    // }
+
+    // // 11. This constraint works on text value types and requires values 
+    // // to match a given regular expression in order to be valid.
+    // constraint StartWithVogelsang on text: value matches /^Vogelsang.*/;
+
+
+    // valuetype idConstraint oftype text {
+    // // 10. Value types can be further refined by providing constraints.
+    // constraints: [
+    //     coordinates,
+    // ];
+    // }
+
+    // // 11. This constraint works on text value types and requires values 
+    // // to match a given regular expression in order to be valid.
+    // constraint coordinates on text: value matches /^[0-9]{1,3}\.[0-9]+,\s*[0-9]{1,3}\.[0-9]+$/;
+   
+
+}
