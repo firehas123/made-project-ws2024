@@ -21,7 +21,7 @@ This study explores the relationship between pollution levels (PM2.5) and respir
 \section*{Data Sources}
 
 \subsection*{Air Quality Data}
-\textbf{Source:} \href{https://aqs.epa.gov/data/}{EPA Air Quality System (AQS)}  
+\textbf{Source:} \href{https://aqs.epa.gov/aqsweb/documents/data_api.html}{EPA Air Quality System (AQS)}  
 \textbf{Reason for Selection:} Provides detailed PM2.5 pollution measurements across California, critical for understanding environmental health impacts.  
 \textbf{Content:} Includes pollutant levels, sampling locations, dates, and measurement units.  
 \textbf{Structure and Quality:}
@@ -32,7 +32,7 @@ This study explores the relationship between pollution levels (PM2.5) and respir
 \end{itemize}
 \textbf{License and Obligations:}  
 Licensed under open access by the EPA. Obligations include attribution, addressed in the project documentation.  
-\href{https://www.epa.gov/airdata}{License Details}
+\href{https://data.gov/open-gov/}{License Details}
 
 \subsection*{Respiratory Health Data}
 \textbf{Source:} \href{https://data.cdc.gov/Chronic-Disease-Indicators/U-S-Chronic-Disease-Indicators/hksd-2xuw}{CDC Chronic Disease Indicators Dataset}  
@@ -45,7 +45,7 @@ Licensed under open access by the EPA. Obligations include attribution, addresse
 \end{itemize}
 \textbf{License and Obligations:}  
 Open Data license with attribution requirements, fulfilled via documentation.  
-\href{https://data.cdc.gov/about}{License Details}
+\href{https://opendatacommons.org/licenses/odbl/1-0/}{License Details}
 
 \section*{Data Pipeline}
 
@@ -60,6 +60,14 @@ The pipeline automates data fetching, cleaning, transformation, merging, and out
     \end{itemize}
     \item \textbf{Loading and Analysis:} Merges datasets using \texttt{state\_code} and \texttt{year} as keys and outputs a merged CSV file for further analysis.
 \end{enumerate}
+
+\textbf{Pipeline Diagram:}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=\textwidth]{pipeline.png}
+    \caption{Data Pipeline Diagram}
+    \label{fig:pipeline}
+\end{figure}
 
 \textbf{Technology:}
 \begin{itemize}
