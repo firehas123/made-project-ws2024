@@ -3,7 +3,7 @@ import requests
 
 def fetch_respiratory_data():
     """Fetch respiratory data and save to CSV."""
-    print("Fetching respiratory data...")
+    print("Starting Respiratory Data")
     
     # API Endpoint and Parameters
     url = "https://data.cdc.gov/resource/hksd-2xuw.json"
