@@ -28,4 +28,4 @@ jobs:
 
     - name: Run tests
       run: |
-        pytest .\project\tests\test_data_fetching.py -v
+        pytest ./project/tests/test_data_fetching.py -v
