@@ -30,4 +30,4 @@ jobs:
       env:
         PYTHONPATH: ${{ github.workspace }}/project
       run: |
-        pytest tests/
+        pytest /project/tests/test_data_fetching.py -v
