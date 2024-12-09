@@ -1,23 +1,24 @@
 import pandas as pd
 import requests
+import sys
+from pathlib import Path
+
+# Add the parent directory to sys.path to import config.py
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+# Import configurations
+from config import RESPIRATORY_API_URL, RESPIRATORY_API_PARAMS, CSV_FILE_RESPIRATORY
 
 def fetch_respiratory_data():
     """Fetch respiratory data and save to CSV."""
-    print("Starting Respiratory Data")
+    print("Starting Respiratory Data Fetch")
     
-    # API Endpoint and Parameters
-    url = "https://data.cdc.gov/resource/hksd-2xuw.json"
-    params = {
-        "$limit": 1000,  # Fetch 1,000 rows at a time
-        "$offset": 0
-        # ,    # Start from the beginning
-        # "$where": "topic='Asthma'",  # Filter for respiratory-related topic
-        # "$$app_token": "YOUR_APP_TOKEN"  # Replace with your Socrata App Token if required
-    }
+    # Copy API parameters to avoid modifying the original
+    params = RESPIRATORY_API_PARAMS.copy()
 
     all_data = []
     while True:
-        response = requests.get(url, params=params)
+        response = requests.get(RESPIRATORY_API_URL, params=params)
         if response.status_code != 200:
             print(f"Error: {response.status_code}, {response.text}")
             break
@@ -29,15 +30,14 @@ def fetch_respiratory_data():
         all_data.extend(data)
         print(f"Fetched {len(all_data)} rows so far for Respiratory")
 
-        # Increment offset for next batch
+        # Increment offset for the next batch
         params["$offset"] += 1000
 
-    # Convert data to DataFrame and Save
+    # Convert data to DataFrame and save
     if all_data:
         df = pd.DataFrame(all_data)
-        csv_file = "respiratory_data.csv"
-        df.to_csv(csv_file, index=False)
-        print(f"Respiratory data saved to {csv_file}")
+        df.to_csv(CSV_FILE_RESPIRATORY, index=False)
+        print(f"Respiratory data saved to {CSV_FILE_RESPIRATORY}")
     else:
         print("No data fetched.")
 

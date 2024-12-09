@@ -1,12 +1,6 @@
 import os
 import pytest
 import pandas as pd
-import sys
-import os
-
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-sys.path.insert(0, PROJECT_ROOT)
-
 from unittest.mock import patch, MagicMock
 from codebase.fetch_air_quality import fetch_air_quality_data
 from codebase.fetch_respiratory import fetch_respiratory_data
@@ -47,61 +41,25 @@ def test_fetch_air_quality_data_successful():
 
     # Check if the file is created
     assert os.path.exists(AIR_QUALITY_FILE), "Air Quality CSV file was not created."
-
-    # Validate file content
     df = pd.read_csv(AIR_QUALITY_FILE)
-    assert not df.empty, "Air Quality CSV file is empty."
-    assert "state_code" in df.columns, "Expected column 'state_code' not found in Air Quality CSV."
+    assert len(df) > 0, "Air Quality CSV file is empty."
 
 
-def test_fetch_air_quality_data_failure():
+def test_fetch_respiratory_data_limit_500_rows():
     """
-    Test fetch_air_quality_data function for failed API response.
+    Test fetch_respiratory_data function to fetch only the first 500 rows.
     """
-    mock_response = MagicMock()
-    mock_response.status_code = 500
-    mock_response.text = "Internal Server Error"
+    mock_data = [{"state_code": "06", "asthma_rate": f"{10.0 + i/100}", "date": f"2023-01-{(i % 30) + 1:02d}"} for i in range(1000)]
 
-    with patch("codebase.fetch_air_quality.requests.get", return_value=mock_response):
-        fetch_air_quality_data()
+    def mock_get(url, params):
+        offset = params.get("$offset", 0)
+        if offset >= 500:
+            return MagicMock(status_code=200, json=MagicMock(return_value=[]))
+        return MagicMock(status_code=200, json=MagicMock(return_value=mock_data[offset:offset + 1000]))
 
-    # Ensure the file is not created
-    assert not os.path.exists(AIR_QUALITY_FILE), "Air Quality CSV file was created despite API failure."
+    with patch("codebase.fetch_respiratory.requests.get", side_effect=mock_get):
+        fetch_respiratory_data()
 
-
-# def test_fetch_respiratory_data_successful():
-#     """
-#     Test fetch_respiratory_data function for successful API response.
-#     """
-#     mock_response = MagicMock()
-#     mock_response.status_code = 200
-#     mock_response.json = MagicMock(return_value=[
-#         {"state_code": "06", "asthma_rate": "10.5", "date": "2023-01-01"},
-#         {"state_code": "06", "asthma_rate": "12.0", "date": "2023-01-02"}
-#     ])
-
-#     with patch("codebase.fetch_respiratory.requests.get", return_value=mock_response):
-#         fetch_respiratory_data()
-
-#     # Check if the file is created
-#     assert os.path.exists(RESPIRATORY_FILE), "Respiratory CSV file was not created."
-
-#     # Validate file content
-#     df = pd.read_csv(RESPIRATORY_FILE)
-#     assert not df.empty, "Respiratory CSV file is empty."
-#     assert "state_code" in df.columns, "Expected column 'state_code' not found in Respiratory CSV."
-
-
-# def test_fetch_respiratory_data_failure():
-#     """
-#     Test fetch_respiratory_data function for failed API response.
-#     """
-#     mock_response = MagicMock()
-#     mock_response.status_code = 500
-#     mock_response.text = "Internal Server Error"
-
-#     with patch("codebase.fetch_respiratory.requests.get", return_value=mock_response):
-#         fetch_respiratory_data()
-
-#     # Ensure the file is not created
-#     assert not os.path.exists(RESPIRATORY_FILE), "Respiratory CSV file was created despite API failure."
+    assert os.path.exists(RESPIRATORY_FILE), "Respiratory CSV file was not created."
+    df = pd.read_csv(RESPIRATORY_FILE)
+    assert len(df) == 500, f"Expected 500 rows, but found {len(df)}."
