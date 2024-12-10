@@ -1,6 +1,6 @@
 # Project Plan
 
-![Respiratory Health and Climate Quality in California](./images/title.png)
+![Respiratory Health and Climate Quality in California](../project/images/pipeline.png)
 
 ## Title
 Respiratory Health and Climate Quality in California
