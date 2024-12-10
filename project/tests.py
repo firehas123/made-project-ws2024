@@ -1,5 +1,6 @@
 import pytest
 
 if __name__ == "__main__":
-    # Run all tests using pytest
-    pytest.main(["-v", "tests/test_data_fetching.py"])
+    print("Running all tests in the tests folder...")
+    # Run all test files in the "tests" folder
+    pytest.main(["-v", "project/tests/"])
