@@ -1,10 +1,5 @@
 import pandas as pd
 import requests
-import sys
-from pathlib import Path
-
-# Add the parent directory to sys.path to import config.py
-sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 # Import configurations
 from config import RESPIRATORY_API_URL, RESPIRATORY_API_PARAMS, CSV_FILE_RESPIRATORY

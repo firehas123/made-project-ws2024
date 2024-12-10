@@ -3,7 +3,7 @@
 API_URL = "https://aqs.epa.gov/data/api/sampleData/byState"
 API_PARAMS = {
     "email": "mr.hassanch@gmail.com",
-    "key": "aquafrog82",  # Replace with your actual API key
+    "key": "goldmouse47",  # Replace with your actual API key
     "param": "88101",  # PM2.5 parameter code
     "bdate": "20230101",  # Begin date
     "edate": "20230131",  # End date

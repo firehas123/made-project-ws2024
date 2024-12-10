@@ -1,14 +1,4 @@
-from codebase.extract import run_data_fetching
-# from codebase.transform import run_transformations
-# from codebase.load import load_data, merge_data, save_data
-
-
-def main():
-    # Step 1: Extract data using threads
-    print("---- Extract Phase ----")
-    run_data_fetching()
-
-    # # Step 2: Load raw data
+ # # Step 2: Load raw data
     # print("---- Load Phase ----")
     # air_quality_df, respiratory_df = load_data()
 
@@ -43,7 +33,3 @@ def main():
     #         print(f"Pipeline execution failed: {e}")
     # else:
     #     print("Pipeline terminated due to missing data.")
-
-
-if __name__ == "__main__":
-    main()
