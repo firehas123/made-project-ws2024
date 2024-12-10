@@ -2,8 +2,8 @@ import os
 import pytest
 import pandas as pd
 from unittest.mock import patch, MagicMock
-from codebase.fetch_air_quality import fetch_air_quality_data
-from codebase.fetch_respiratory import fetch_respiratory_data
+from project.codebase.fetch_air_quality import fetch_air_quality_data
+from project.codebase.fetch_respiratory import fetch_respiratory_data
 
 # File paths for output files
 AIR_QUALITY_FILE = "air_quality_data.csv"
