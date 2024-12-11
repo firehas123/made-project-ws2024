@@ -23,5 +23,5 @@ jobs:
 
     - name: Install dependencies and run tests
       run: |
-        chmod +x project/tests/tests.sh
+        chmod +x -R ./project 
         ./project/tests.sh
