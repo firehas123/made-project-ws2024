@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 
 # Import configurations
-from config import RESPIRATORY_API_URL, RESPIRATORY_API_PARAMS, CSV_FILE_RESPIRATORY
+from codebase.config import RESPIRATORY_API_URL, RESPIRATORY_API_PARAMS, CSV_FILE_RESPIRATORY
 
 def fetch_respiratory_data():
     """Fetch respiratory data and save to CSV."""

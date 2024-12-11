@@ -2,7 +2,7 @@ import pandas as pd
 import requests
 
 # Import the configuration
-from config import API_URL, API_PARAMS, FILENAME
+from codebase.config import API_URL, API_PARAMS, FILENAME
 
 
 def fetch_air_quality_data():

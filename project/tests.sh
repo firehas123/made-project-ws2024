@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo "Current directory: $(pwd)"
+
 # Ensure the script is executable
 chmod +x tests.sh
 
@@ -9,11 +11,11 @@ echo "PYTHONPATH set to $PYTHONPATH"
 
 # Step 2: Install required dependencies
 echo "Installing required Python libraries..."
-pip install --no-cache-dir -r requirements.txt
+pip install --no-cache-dir -r ./project/requirements.txt
 
 # Step 3: Run the tests
 echo "Running the tests..."
-python project/tests/tests.py
+pytest ./project/tests.py -v
 
 # Step 4: Completion message
 echo "All tests executed successfully."
