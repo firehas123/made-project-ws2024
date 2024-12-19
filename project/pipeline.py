@@ -18,24 +18,24 @@ def main():
             print("---- Transform Phase ----")
             air_quality_df, respiratory_df = run_transformations(air_quality_df, respiratory_df)
             
-            # Log the state of the DataFrames
-            if air_quality_df is not None:
-                print(f"Air Quality DataFrame loaded with {air_quality_df.shape[0]} rows.")
-            else:
-                print("Air Quality DataFrame is None after transformation.")
+            # # Log the state of the DataFrames
+            # if air_quality_df is not None:
+            #     print(f"Air Quality DataFrame loaded with {air_quality_df.shape[0]} rows.")
+            # else:
+            #     print("Air Quality DataFrame is None after transformation.")
             
-            if respiratory_df is not None:
-                print(f"Respiratory DataFrame loaded with {respiratory_df.shape[0]} rows.")
-            else:
-                print("Respiratory DataFrame is None after transformation.")
+            # if respiratory_df is not None:
+            #     print(f"Respiratory DataFrame loaded with {respiratory_df.shape[0]} rows.")
+            # else:
+            #     print("Respiratory DataFrame is None after transformation.")
             
-            # Step 4: Merge and Save Phase
-            print("---- Merge and Save Phase ----")
-            if air_quality_df is not None and respiratory_df is not None:
-                merged_df = merge_data(air_quality_df, respiratory_df)
-                save_data(merged_df, "merged_data.csv")
-            else:
-                raise ValueError("One or both transformed DataFrames are None. Check the transformation phase.")
+            # # Step 4: Merge and Save Phase
+            # print("---- Merge and Save Phase ----")
+            # if air_quality_df is not None and respiratory_df is not None:
+            #     merged_df = merge_data(air_quality_df, respiratory_df)
+            #     save_data(merged_df, "merged_data.csv")
+            # else:
+            #     raise ValueError("One or both transformed DataFrames are None. Check the transformation phase.")
         
             print("Pipeline executed successfully.")
         

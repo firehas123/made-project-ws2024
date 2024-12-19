@@ -1,6 +1,6 @@
 import threading
-from transform_air_quality import preprocess_air_quality
-from transform_respiratory import preprocess_respiratory_data, filter_relevant_topics
+from codebase.transform_air_quality import preprocess_air_quality
+from codebase.transform_respiratory import preprocess_respiratory_data, filter_relevant_topics
 
 
 def run_transformations(air_quality_df, respiratory_df):
