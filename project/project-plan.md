@@ -1,6 +1,6 @@
 # Project Plan
 
-![Respiratory Health and Climate Quality in California](./images/title.png)
+![Respiratory Health and Climate Quality in California](./images/read-me/title.png)
 
 ## Title
 Respiratory Health and Climate Quality in California
@@ -56,7 +56,7 @@ This project investigates the correlation between climate quality factors, speci
 \`\`\`
 Extract -> Transform -> Load
 \`\`\`
-![Pipeline Overview](./images/pipeline.png)
+![Pipeline Overview](./images/read-me/pipeline.png)
 
 - The project employs a modular architecture to ensure clarity and reproducibility.
 - **Multithreading**: Enabled efficient preprocessing by parallelizing data cleaning and transformation tasks.
