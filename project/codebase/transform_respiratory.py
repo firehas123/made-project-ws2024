@@ -22,7 +22,7 @@ def preprocess_respiratory_data(respiratory_df):
     # Keep only relevant columns
     relevant_columns = [
         "year", "state_code", "county_name", "topic", "respiratory_value", 
-        "respiratory_value_type", "stratificationcategory1", "stratification1", "geolocation"
+        "respiratory_value_type", "stratificationcategory1", "stratification1"
     ]
     
     # Verify that all relevant columns exist in the DataFrame

@@ -6,11 +6,11 @@ API_PARAMS = {
     "key": "berrymouse39",  # Replace with your actual API key
     "param": "88101",  # PM2.5 parameter code
     "bdate": "20190101",  # Begin date
-    "edate": "20190131",  # End date
+    "edate": "20221231",  # End date
     "state": "06"  # California FIPS code
 }
 
-FILENAME = "air_quality_data1.csv"
+FILENAME = "air_quality_data.csv"
 
 
 # Respiratory API URL

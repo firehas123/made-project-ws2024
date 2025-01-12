@@ -1,5 +1,0 @@
-.DS_Store
-/data/*
-!/data/.gitkeep
-.pytest_cache/
-__pycache__/

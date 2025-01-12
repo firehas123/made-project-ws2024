@@ -21,8 +21,7 @@ def preprocess_air_quality(air_quality_df):
 
         # Keep only relevant columns
         relevant_columns = [
-            "state_code", "county_code", "site_number", "latitude",
-            "longitude", "parameter", "date_local", "sample_measurement", "units_of_measure"
+            "state_code", "county_code", "site_number", "parameter", "date_local", "sample_measurement", "units_of_measure"
         ]
         air_quality_df = air_quality_df[relevant_columns]
         print("Irrelevant columns removed.")

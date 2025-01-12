@@ -1,123 +1,73 @@
 import pandas as pd
 import requests
-from codebase.config import API_URL, API_PARAMS, FILENAME
+from datetime import datetime, timedelta
+import time
 
+# Import the configuration
+from codebase.config import API_URL, API_PARAMS, FILENAME
 
 def fetch_air_quality_data():
     """
-    Fetch air quality data for each year in the specified range and merge them into a single CSV file.
+    Fetch air quality data incrementally (monthly) and merge into a single CSV file.
     """
     try:
         print("Starting Air Data Fetch...")
         bdate = API_PARAMS.get("bdate")
         edate = API_PARAMS.get("edate")
-
+        
         if bdate and edate:
-            bdate =  pd.to_datetime(bdate, format='%Y')
-            edate = pd.to_datetime(edate, format='%Y')
-            years = edate.year - bdate.year
-            print(f"Fetching data for {years + 1} years from {bdate.year} to {edate.year}...")
+            bdate = pd.to_datetime(bdate, format='%Y%m%d')
+            edate = pd.to_datetime(edate, format='%Y%m%d')
+            
+            current_date = bdate
             all_data = pd.DataFrame()
-
-            for year in range(bdate.year, edate.year + 1):
-                API_PARAMS["bdate"] = f"{year}0101"
-                API_PARAMS["edate"] = f"{year}1231"
-                print(f"Fetching data for {year}...")
-                print(f"API request sent to {API_URL} with params {API_PARAMS}")
-
+            
+            while current_date <= edate:
+                next_date = (current_date + pd.DateOffset(months=1)) - timedelta(days=1)
+                if next_date > edate:
+                    next_date = edate
+                
+                API_PARAMS["bdate"] = current_date.strftime('%Y%m%d')
+                API_PARAMS["edate"] = next_date.strftime('%Y%m%d')
+                
+                print(f"Fetching data from {API_PARAMS['bdate']} to {API_PARAMS['edate']}...")
                 response = requests.get(API_URL, params=API_PARAMS)
                 
                 response.raise_for_status()                
                 response_json = response.json()
-                print("data fetched")
+                
                 if "Data" in response_json:
-                    yearly_data = pd.DataFrame(response_json["Data"])
-                    all_data = pd.concat([all_data, yearly_data], ignore_index=True)
+                    chunk_data = pd.DataFrame(response_json["Data"])
+                    all_data = pd.concat([all_data, chunk_data], ignore_index=True)
+                    print(f"Data for {API_PARAMS['bdate']} to {API_PARAMS['edate']} fetched successfully.")
                 else:
-                    print(f"No data found for {year}.")
-
-            if not all_data.empty:
-                print("Saving data to CSV...")
-                save_to_csv(all_data)
-            else:
-                print("No data found to save.")
-        
+                    print(f"No data found from {API_PARAMS['bdate']} to {API_PARAMS['edate']}. Moving to next window.")
+                
+                current_date = next_date + timedelta(days=1)
+                print("Pausing for 1 minutes to avoid API limits...")
+                time.sleep(60)  # Pause for 1 minutes
+            
+            # Append all data to CSV after loop ends
+            append_to_csv(all_data)
         else:
-            response = requests.get(API_URL, params=API_PARAMS)
-            print(f"API request sent to {API_URL} with params {API_PARAMS}")
-            response.raise_for_status()
-            response_json = response.json()
-
-            if "Data" in response_json:
-                print("Saving data to CSV...")
-                save_to_csv(response_json["Data"])
-            else:
-                print("No 'Data' key found in the API response.")
-
+            print("No valid start or end date provided in API_PARAMS.")
+            
     except requests.exceptions.RequestException as e:
         print(f"Error fetching data: {e}")
-
-
-def save_to_csv(data, filename=FILENAME):
-    """
-    Save the data to a CSV file.
-    """
-    try:
-        if data:
-            print("Converting data to DataFrame...")
-            df = pd.DataFrame(data)
-            print(f"Saving DataFrame to {filename}...")
-            df.to_csv(filename, index=False)
-            print(f"Data successfully saved to {filename}")
-        else:
-            print("No data found to save. Data is empty or None.")
     except Exception as e:
-        print(f"Error saving data to CSV: {e}")
-import pandas as pd
-import requests
-
-# Import the configuration
-from codebase.config import API_URL, API_PARAMS, FILENAME
+        print(f"Unexpected error: {e}")
 
 
-def fetch_air_quality_data():
+def append_to_csv(data, filename=FILENAME):
     """
-    Fetch air quality data from the API and save it to a CSV.
+    Append data to an existing CSV file or create a new one if it doesn't exist.
     """
     try:
-        print("Starting Air Data Fetch...")
-        response = requests.get(API_URL, params=API_PARAMS)
-        print(f"API request sent to {API_URL} with params {API_PARAMS}")
-        response.raise_for_status()  # Raise HTTPError for bad responses (4xx, 5xx)
-        response_json = response.json()
-
-        # Check if the API request was successful
-        if response_json.get("status") == "Failed":
-            print(f"API Request Failed: {response_json.get('error')}")
-        
-        # Save the data
-        if "Data" in response_json:
-            print("Saving data to CSV...")
-            save_to_csv(response_json["Data"])
+        if not data.empty:
+            write_header = not pd.io.common.file_exists(filename)
+            data.to_csv(filename, mode='a', index=False, header=write_header)
+            print(f"Data appended to {filename}.")
         else:
-            print("No 'Data' key found in the API response.")
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching data: {e}")
-        return None
-
-
-def save_to_csv(data, filename=FILENAME):
-    """
-    Save the data to a CSV file.
-    """
-    try:
-        if data:
-            print("Converting data to DataFrame...")
-            df = pd.DataFrame(data)
-            print(f"Saving DataFrame to {filename}...")
-            df.to_csv(filename, index=False)
-            print(f"Data successfully saved to {filename}")
-        else:
-            print("No data found to save. Data is empty or None.")
+            print("No data to append.")
     except Exception as e:
-        print(f"Error saving data to CSV: {e}")
+        print(f"Error appending data to CSV: {e}")
